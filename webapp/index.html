@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:ay="http://www.w3.org/1999/xhtml" xmlns:display="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Chat</title>
@@ -13,16 +13,21 @@
 </head>
 <body>
 <div class="container-fluid">
-  <h1>
-    Чат
-  </h1>
   <div class="row" style="height: 75%; margin-bottom: 10px">
-    <div class="col-xs-12" style="height: 100%">
+    <div class="input_forms autorisation">
+      <form action="#" class="form-signin" id="autform">
+        <h2 class="form-signin-heading"></h2>
+        <input type="text" class="input-block-level login" placeholder="Логин">
+        <input type="password" class="input-block-level pass" placeholder="Пароль">
+        <button class="btn btn-large btn-primary login_password_send" type="submit">Войти</button>
+      </form>
+    </div>
+    <div class="col-xs-12 autorise_chat" style="height: 100%; display:none">
                 <textarea readonly class="chat_messages_list" style="height: 100%; width: 100%;">
                 </textarea>
     </div>
   </div>
-  <div class="row">
+  <div class="row autorise_chat" style="display:none">
     <div class="col-xs-10">
       <input type="text" class="form-control chat_new_messages" style="width: 100%;">
     </div>

@@ -17,14 +17,17 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setStatus(200);
-        resp.setHeader("text/html", "application/json;charset=UTF-8");
-        try {
-            String jsonString = new Database().createJSON();
-            System.out.println(jsonString);
-            resp.getWriter().write(jsonString);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (getServletContext().getAttribute(req.getParameter("login"))
+                .equals(req.getParameter("uuid"))) {
+            resp.setStatus(200);
+            resp.setHeader("text/html", "application/json;charset=UTF-8");
+            try {
+                String jsonString = new Database().createJSON();
+                System.out.println(jsonString);
+                resp.getWriter().write(jsonString);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

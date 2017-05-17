@@ -13,13 +13,17 @@ import java.sql.SQLException;
 public class WriteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String message = req.getParameter("message");
+        String login = req.getParameter("login");
         WriteToDatabase writeToDatabase = new WriteToDatabase();
-        try {
-            writeToDatabase.write(message);
-            resp.setStatus(200);
-        } catch (SQLException e) {
-            resp.setStatus(501);
-            e.printStackTrace();
+        if (getServletContext().getAttribute(login)
+                .equals(req.getParameter("uuid"))) {
+            try {
+                writeToDatabase.write(message, login);
+                resp.setStatus(200);
+            } catch (SQLException e) {
+                resp.setStatus(501);
+                e.printStackTrace();
+            }
         }
     }
 }
