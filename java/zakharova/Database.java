@@ -22,19 +22,19 @@ public class Database {
         ResultSet result = preparedStatement.executeQuery();
         while (result.next())
             if (login.equals(result.getString("login")) && password.equals(result.getString("password"))) {
-                System.out.println("gfdbuhjnkml,fgd");
                 return true;
             }
         return false;
     }
 
-    public String createJSON() throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM message");
+    public String createJSON(Timestamp timestamp) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM messageTime WHERE time >= ?");
+        preparedStatement.setTimestamp(1, timestamp);
         ResultSet result = preparedStatement.executeQuery();
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray();
         while (result.next()) {
-            System.out.println(result.getString("login") + ":" + result.getString("message"));
+            array.add("[" + result.getTimestamp("time") + "]");
             array.add(result.getString("login") + ": ");
             array.add(result.getString("message"));
             array.add("\n");
@@ -45,7 +45,4 @@ public class Database {
 
     //cat 1234
     //dog 5678
-    //messageTime
-
-
 }

@@ -21,8 +21,6 @@ public class Authorise extends HttpServlet {
             if(new Database().checkData(log, pass)){
                 UUID uuid = UUID.randomUUID();
                 getServletContext().setAttribute(log, uuid.toString());
-                //HttpSession session = req.getSession(true);
-                //session.setAttribute("isFerst", "true");
                 resp.setStatus(200);
                 resp.getWriter().write(uuid.toString());
             }

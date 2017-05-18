@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class MainServlet extends HttpServlet {
     @Override
@@ -22,8 +24,8 @@ public class MainServlet extends HttpServlet {
             resp.setStatus(200);
             resp.setHeader("text/html", "application/json;charset=UTF-8");
             try {
-                String jsonString = new Database().createJSON();
-                System.out.println(jsonString);
+                String jsonString = new Database().createJSON(new Timestamp
+                        (new Date(req.getParameter("date")).getTime()));
                 resp.getWriter().write(jsonString);
             } catch (SQLException e) {
                 e.printStackTrace();
